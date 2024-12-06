@@ -11,3 +11,9 @@ def cart(request):
         "items": [None, None, None, None]
     }
     return render(request, "tiendapp/cart.html", context)
+
+def detail(request):
+    context = {
+
+    }
+    return render(request, "tiendapp/product_detail.html", context)

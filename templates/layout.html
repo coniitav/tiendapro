@@ -13,9 +13,27 @@
   	</head>
   	<body>
         <div class="container-fliud">
-            <h1>TiedaPRO</h1>
-            {% block content %}
-			{% endblock %} 
+            <nav class="navbar navbar-expand bg-dark">
+				<div class="container-fluid">
+					<a href="#" class="navbar-brand text-white">TiendaPRO</a>
+				</div>
+			</nav>
+			<main style="height: 75vh!important;">
+				{% block content %}
+				{% endblock %} 
+			</main>
+			<footer class="bg-secondary text-body-seconday">
+				<div class="d-flex p-4">
+					<div class="w-100">
+						<h4>TiendaPRO</h4>
+						<p>Descripción</p>
+					</div>
+					<div class="w-100">
+						<h4>Ubicanos</h4>
+						<p>Av. Viña del Mar 123</p>
+					</div>
+				</div>
+			</footer>
         </div>   
 		
 		<script
