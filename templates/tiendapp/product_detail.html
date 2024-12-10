@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div class="d-flex">
-        <div class="w-100">
-            <img src="/" />
+        <div class="w-25">
+            <img src="{{producto.image.url}}" style="width: 100%;" />
         </div>
         <div class="w-100 d-flex flex-column">
-            <h1>Título</h1>
-            <p>Descripción</p>
+            <h1>{{producto.name}}</h1>
+            <p>{{producto.description}}</p>
             <a href="#" class="btn btn-primary"> Añadir a carrito</a>
         </div>
     </div>

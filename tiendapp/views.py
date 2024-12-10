@@ -1,10 +1,15 @@
 from django.shortcuts import render
+from .models import Product
 
 # Create your views here.
 
 
 def index(request):
-    return render(request, "tiendapp/index.html")
+    productos = Product.objects.all()
+    context = {
+        "items": productos
+    }
+    return render(request, "tiendapp/index.html", context)
 
 def cart(request):
     context = {
@@ -12,8 +17,9 @@ def cart(request):
     }
     return render(request, "tiendapp/cart.html", context)
 
-def detail(request):
+def detail(request, code):
+    producto = Product.objects.get(sku = code)
     context = {
-
+        "producto": producto
     }
     return render(request, "tiendapp/product_detail.html", context)
