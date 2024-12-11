@@ -10,4 +10,12 @@
             <a href="#" class="btn btn-primary"> Añadir a carrito</a>
         </div>
     </div>
+    <div class="d-flex mt-4 pt-4">
+        <h4>Ver también:</h4>
+        <div class="d-flex">
+            {% for extra in extras %}
+                <div>{{extra.name}}</div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Product, ProductCategory
 
 # Create your views here.
 
@@ -19,7 +19,14 @@ def cart(request):
 
 def detail(request, code):
     producto = Product.objects.get(sku = code)
+    categorias = [c.category_id for c in ProductCategory.objects.filter(product = producto)]
+    productos_categorias = ProductCategory.objects.filter(category__in = categorias)
+    extras = []
+    for pc in productos_categorias:
+        extras.append(pc.product)
+
     context = {
-        "producto": producto
+        "producto": producto,
+        "extras": extras
     }
     return render(request, "tiendapp/product_detail.html", context)
