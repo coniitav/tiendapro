@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="d-flex w-50 mt-4" style="margin: 0px auto;">
+        <form action="/sign_in" method="POST" class="w-100">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Email</label>
+                <input class="form-control w-100" type="email" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Constraseña</label>
+                <input class="form-control w-100" type="password" name="password">
+            </div>
+            <div class="form-group">
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+    </section>
+{% endblock %}
