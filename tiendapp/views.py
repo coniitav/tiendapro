@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product, ProductCategory
+from .models import Product, ProductCategory, Customer, Order, OrderDetail
 
 # Create your views here.
 
@@ -36,4 +36,21 @@ def detail(request, code):
     return render(request, "tiendapp/product_detail.html", context)
 
 def add_to_cart(request, code):
+    producto = Product.objects.get(sku = code)
+    customer = Customer.objects.get(user = request.user)
+
+    current_order = customer.get_current_order()
+
+    detalle = OrderDetail.objects.filter(product = producto, order = current_order).first()
+    if detalle is not None:
+        detalle.price = producto.price
+        detalle.save()
+    else:
+        detalle = OrderDetail()
+        detalle.product = producto
+        detalle.order = current_order
+        detalle.quantity = 1
+        detalle.price = producto.price
+        detalle.save()
+
     return redirect("/cart")

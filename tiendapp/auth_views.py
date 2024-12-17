@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from tiendapp.models import Customer
+from django.contrib import messages
 
 def sign_up(request):
     return render(request, "tiendapp/sign_up.html")
@@ -12,6 +13,7 @@ def sign_up_create(request):
 
         nuevo_user = User.objects.filter(username = data["email"]).first()
         if nuevo_user is not None:
+            messages.error(request, "Este email ya está registrado")
             return redirect("/sign_up")
         
         if nuevo_user is None:
@@ -53,3 +55,8 @@ def sign_in(request):
             pass
 
     return render(request, "tiendapp/sign_in.html")
+
+def sign_out(request):
+    from django.contrib.auth import logout
+    logout(request)
+    return redirect("/")

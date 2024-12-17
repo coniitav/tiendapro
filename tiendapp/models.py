@@ -41,7 +41,7 @@ class Customer(models.Model):
         return self.user.username + " Telefono: " + self.phone
     
     def get_current_order(self):
-        nueva_order = Order.objects.filter(customer = self).first()
+        nueva_order = Order.objects.filter(customer = self, status = "PENDIENTE").first()
         if nueva_order is None:
             nueva_order = Order()
             nueva_order.customer = self
