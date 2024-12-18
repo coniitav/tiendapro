@@ -12,8 +12,12 @@ def index(request):
     return render(request, "tiendapp/index.html", context)
 
 def cart(request):
+    customer = Customer.objects.get(user = request.user)
+    current_order = customer.get_current_order()
+    detalles = OrderDetail.objects.filter(order = current_order)
+
     context = {
-        "items": [None, None, None, None]
+        "items": detalles
     }
     return render(request, "tiendapp/cart.html", context)
 
@@ -36,6 +40,9 @@ def detail(request, code):
     return render(request, "tiendapp/product_detail.html", context)
 
 def add_to_cart(request, code):
+    if not request.user.is_authenticated:
+        return redirect("/sign_in")
+
     producto = Product.objects.get(sku = code)
     customer = Customer.objects.get(user = request.user)
 
@@ -52,5 +59,17 @@ def add_to_cart(request, code):
         detalle.quantity = 1
         detalle.price = producto.price
         detalle.save()
+
+    return redirect("/cart")
+
+def remove_from_cart(request, code):
+    producto = Product.objects.get(sku = code)
+    customer = Customer.objects.get(user = request.user)
+    current_order = customer.get_current_order()
+
+    item = OrderDetail.objects.filter(order = current_order, product = producto).first()
+
+    if item is not None:
+        item.delete()
 
     return redirect("/cart")

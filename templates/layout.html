@@ -23,12 +23,13 @@
 							<a class="btn btn-outline-secondary" href="/sign_in">Sign In</a>
 							<a class="btn btn-outline-success" href="/sign_up">Sign Up</a>
 						{% else %}
+							<a class="btn btn-outline-warning" href="/cart">Cart</a>
 							<a class="btn btn-outline-danger" href="/sign_out">Sign out</a>
 						{% endif %}
 					</div>
 				</div>
 			</nav>
-			<main style="height: 75vh!important;">
+			<main >
 				{%if messages %}
 					<div class="">
 						{% for message in messages %}

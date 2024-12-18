@@ -57,6 +57,9 @@ class Order(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=32) # PENDIENTE #PAGADO
 
+    def __str__(self):
+        return "Order: " + self.customer.user.username + " Estado Order: " + self.status
+
 class OrderDetail(models.Model):
     # ORDER tiene muchos ORDER DETAIL
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
@@ -65,4 +68,4 @@ class OrderDetail(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=6) #9999.12
     quantity = models.DecimalField(decimal_places=2, max_digits=6) #9999.12
     def __str__(self):
-        return self.order.id + " " + self.product.name 
+        return str(self.order.id) + " " + self.product.name 

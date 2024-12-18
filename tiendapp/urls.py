@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, cart, detail, add_to_cart
+from .views import index, cart, detail, add_to_cart, remove_from_cart
 from .auth_views import sign_up, sign_up_create, sign_in, sign_out
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path("sign_up/create", sign_up_create, name="sign_up_create"),
     path("sign_in", sign_in, name="sign_in"),
     path("sign_out", sign_out, name="sign_out"),
+    path("remove_from_cart/<code>", remove_from_cart, name="remove_from_cart"),
 ]
